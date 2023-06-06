@@ -1,38 +1,33 @@
 #include <Arduino.h>
 #include <Servo.h>
 
-/*
-  Simple Blink sketch
-  simple-blink.cpp
-  Use for PlatformIO demo
-
-  From original Arduino Blink Sketch
-  https://www.arduino.cc/en/Tutorial/Blink
-
-  DroneBot Workshop 2021
-  https://dronebotworkshop.com
-*/
-
-// Set LED_BUILTIN if undefined or not pin 13
-// #define LED_BUILTIN 13
+const int ledPin = 13;    // Replace with the appropriate pin number where the LED is connected
+int blinkInterval = 1000; // Default blinking interval in milliseconds
 
 void setup()
 {
-  // Initialize LED pin as an output.
-  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);
 }
 
 void loop()
 {
-  // Set the LED HIGH
-  digitalWrite(LED_BUILTIN, HIGH);
+  if (Serial.available() > 0)
+  {
+    char receivedChar = Serial.read();
 
-  // Wait for a second
-  delay(500);
+    if (receivedChar == '1')
+    {
+      blinkInterval = 1000; // Set blinking interval to 1 second
+    }
+    else if (receivedChar == '2')
+    {
+      blinkInterval = 2000; // Set blinking interval to 2 seconds
+    }
+  }
 
-  // Set the LED LOW
-  digitalWrite(LED_BUILTIN, LOW);
-
-  // Wait for a second
-  delay(500);
+  digitalWrite(ledPin, HIGH); // Turn on the LED
+  delay(blinkInterval / 2);   // Half of the interval
+  digitalWrite(ledPin, LOW);  // Turn off the LED
+  delay(blinkInterval / 2);   // Half of the interval
 }
