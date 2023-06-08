@@ -18,16 +18,21 @@ void loop()
 
     if (receivedChar == '1')
     {
-      blinkInterval = 1000; // Set blinking interval to 1 second
+      blinkInterval = 250; // Set blinking interval to 1 second
     }
     else if (receivedChar == '2')
     {
-      blinkInterval = 2000; // Set blinking interval to 2 seconds
+      blinkInterval = 500; // Set blinking interval to 2 seconds
     }
   }
 
   digitalWrite(ledPin, HIGH); // Turn on the LED
   delay(blinkInterval / 2);   // Half of the interval
-  digitalWrite(ledPin, LOW);  // Turn off the LED
-  delay(blinkInterval / 2);   // Half of the interval
+
+  Serial.println("hello");
+
+  digitalWrite(ledPin, LOW); // Turn off the LED
+  delay(blinkInterval / 2);  // Half of the interval
+
+  Serial.println("hi");
 }

@@ -8,7 +8,7 @@ baud_rate = 9600
 ser = serial.Serial(arduino_port, baud_rate, timeout=1)
 
 # Wait for user input
-while (1):
+while True:
 
     user_input = input("Enter 'y' to blink fast or 'n' to blink slow: ")
 
@@ -17,6 +17,8 @@ while (1):
         ser.write(b'1')  # Send '1' to the Arduino to indicate fast blinking
     elif user_input == 'n':
         ser.write(b'2')  # Send '2' to the Arduino to indicate slow blinking
+    elif user_input == 'q':
+        break
 
 # Close the serial connection
 ser.close()
